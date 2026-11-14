@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AQTool Alpha</title>
+<meta name="description" content="AQTool —— Escape The Backrooms 外部菜单绘制 / 玩家 / 实体 / 物品 / 关卡 / 娱乐，三栏式界面" />
+<meta name="theme-color" content="#b9bbbe" />
+<link rel="stylesheet" href="styles.css?v=11" />
+<script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+<div class="scene" aria-hidden="true">
+  <div class="blob blob-a"></div>
+  <div class="blob blob-b"></div>
+  <div class="blob blob-c"></div>
+</div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="tb-brand" href="#top">
+      <img class="tb-logo" src="aq-logo-dark.png" alt="" />
+      <span class="tb-name">AQTool</span>
+      <span class="side-badge">Alpha</span>
+    </a>
+    <nav class="tb-links">
+      <a href="#ui">界面</a>
+      <a href="#features">功能</a>
+      <a href="#install">使用</a>
+      <a href="#faq">问答</a>
+    </nav>
+    <a class="btn-solid btn-sm" href="#install">下载</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="intro">
+    <img class="intro-logo" src="aq-logo-dark.png" alt="AQTool" />
+    <h1 class="intro-title">AQTool <span class="side-badge">Alpha</span></h1>
+    <p class="intro-sub">
+      Escape The Backrooms 外部菜单绘制透视、玩家增强、实体生成、关卡跳转，<br />
+      三栏式界面，双击即开
+    </p>
+    <div class="intro-cta">
+      <a class="btn-solid" href="#ui">看看界面</a>
+      <a class="btn-line" href="#features">功能介绍</a>
+    </div>
+    <div class="intro-stats">
+      <div class="st"><b>219</b><span>项功能</span></div>
+      <div class="st-sep"></div>
+      <div class="st"><b>18</b><span>个分组</span></div>
+      <div class="st-sep"></div>
+      <div class="st"><b>9</b><span>个页面</span></div>
+      <div class="st-sep"></div>
+      <div class="st"><b>4</b><span>个大类</span></div>
+    </div>
+  </section>
+
+  <section class="showcase" id="ui">
+    <div class="showcase-head">
+      <p class="eyebrow">界面</p>
+      <h2 class="section-title">三栏，一眼到底</h2>
+      <p class="section-sub">下面这块是真的 —— 开关能点，滑条能拖，分组标题能开关</p>
+    </div>
+
+    <div class="showcase-wrap" id="stageWrap">
+      <div class="stage-slot" id="stageSlot">
+        <div class="stage" id="stage">
+          <div class="stage-inner">
+
+            <aside class="panel side">
+              <div class="side-top">
+                <img class="side-logo" src="aq-logo-dark.png" alt="AQTool" />
+                <div class="side-brand">
+                  <span class="side-name">AQTool</span>
+                  <span class="side-badge">Alpha</span>
+                </div>
+                <div class="side-rule"></div>
+                <nav class="nav1" id="nav1">
+                  <div class="n1">玩家</div>
+                  <div class="n1 on">功能</div>
+                  <div class="n1">关卡</div>
+                  <div class="n1">存档</div>
+                  <div class="n1">房间</div>
+                  <div class="n1">Web</div>
+                  <div class="n1">设置</div>
+                </nav>
+              </div>
+              <div class="side-bottom">
+                <button class="reinject" id="reinject" type="button">重新注入</button>
+                <p class="by">By [Admin]sh1r0</p>
+                <p class="qq">QQ 3269576560</p>
+                <div class="user">
+                  <img class="user-av" src="avatar.png" alt="" />
+                  <span>[Admin]sh1r0</span>
+                </div>
+              </div>
+            </aside>
+
+            <aside class="panel pages">
+              <div class="nav2" id="nav2">
+                <div class="n2 on">绘制</div>
+                <div class="n2">实体</div>
+                <div class="n2">物品</div>
+                <div class="n2">常用</div>
+                <div class="n2">皮肤</div>
+                <div class="n2">娱乐</div>
+              </div>
+            </aside>
+
+            <section class="panel content">
+              <div class="col col-a" id="colA"></div>
+              <div class="col col-b" id="colB"></div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <p class="eyebrow">功能</p>
+    <h2 class="section-title">六个方向，覆盖整局流程</h2>
+    <p class="section-sub">从进图看人，到刷物品、跳关卡，功能按「大类 → 页面 → 分组」组织</p>
+
+    <div class="cards">
+      <article class="card">
+        <div class="card-top"><span class="card-idx">01</span><h3>绘制</h3></div>
+        <p class="card-desc">透视、方框、名称、距离、射线、碰撞箱、雷达</p>
+        <ul class="card-list">
+          <li>玩家 / 物品 / 实体 / 可互动</li>
+          <li>方框 · 名称 · 距离 · 射线</li>
+          <li>碰撞箱 · 绘制胶囊 · 雷达</li>
+          <li>绘制距离可调，实时生效</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="card-idx">02</span><h3>玩家</h3></div>
+        <p class="card-desc">自身状态、视角、移动速度、玩家传送</p>
+        <ul class="card-list">
+          <li>无限耐力 · 无敌 · 无限跳跃</li>
+          <li>飞行 / 防拉回 · 灵魂出窍</li>
+          <li>第三人称 · 静默转头 · 相机距离</li>
+          <li>全局速度 · 跳跃高度 · 人物惯性</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="card-idx">03</span><h3>实体</h3></div>
+        <p class="card-desc">生成、控制、删除，含限定实体</p>
+        <ul class="card-list">
+          <li>细菌 · 窃皮者 · 笑魇 · 猎犬</li>
+          <li>死亡飞蛾 · 探险者 · 动画实体</li>
+          <li>派对客 / 大眼怪 / 无面灵等限定</li>
+          <li>控制实体 · 调速度 · 一键清场</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="card-idx">04</span><h3>物品</h3></div>
+        <p class="card-desc">全物品生成，以及范围拾取</p>
+        <ul class="card-list">
+          <li>杏仁水 · 手电筒 · 信号枪 · 电锯</li>
+          <li>对讲机 · 撬棍 · 相机 · 扫描仪</li>
+          <li>荧光棒 · 烟花 · 蛾冻 · 刀</li>
+          <li>范围拾取 · 显示范围 · 物品连线</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="card-idx">05</span><h3>关卡</h3></div>
+        <p class="card-desc">30+ 层级直达，含隐藏与动态层</p>
+        <ul class="card-list">
+          <li>Level 0 – Level 10</li>
+          <li>Level Fun / Fun+ / ! / !-!</li>
+          <li>Level 37 / 94 / 188 / 922 / 974</li>
+          <li>零食室 · 草房间 · 过量生长</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="card-idx">06</span><h3>娱乐</h3></div>
+        <p class="card-desc">自瞄、杀戮光环、烟花子追</p>
+        <ul class="card-list">
+          <li>启动自瞄 · 自瞄玩家 / 实体</li>
+          <li>杀戮光环 · 自动挥刀</li>
+          <li>子追烟花 · 自动判断爆开时间</li>
+          <li>信号枪无 CD · 不显示信号弹</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="install">
+    <p class="eyebrow">使用</p>
+    <h2 class="section-title">五步进游戏</h2>
+    <p class="section-sub">双击启动后会自行启动注入游戏</p>
+
+    <ol class="steps">
+      <li>
+        <span class="step-num">01</span>
+        <div class="step-body">
+          <h4>下载并解压</h4>
+          <p>从 Release 下载最新版本，解压到一个固定文件夹，别放临时目录</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">02</span>
+        <div class="step-body">
+          <h4>运行 loader.exe</h4>
+          <p>双击解压目录里的启动器，建议右键以管理员身份运行</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">03</span>
+        <div class="step-body">
+          <h4>点击「加载修改器」</h4>
+          <p>等提示加载完成即可使用</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">04</span>
+        <div class="step-body">
+          <h4>自动开启游戏</h4>
+          <p>正常启动 Escape The Backrooms，进到主菜单即可</p>
+        </div>
+      </li>
+      <li>
+        <span class="step-num">05</span>
+        <div class="step-body">
+          <h4>F1呼出菜单</h4>
+          <p>进游戏后F1呼出菜单左键点分组标题开关主开关，右键展开收起子项</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="section" id="faq">
+    <p class="eyebrow">问答</p>
+    <h2 class="section-title">常见问题</h2>
+
+    <details class="faq">
+      <summary>为什么一定要先加载、再开游戏？</summary>
+      <p>加载器需要在游戏进程启动前完成注入准备顺序反了会找不到进程，菜单呼不出来 —— 这时关掉游戏，重开加载器再走一遍</p>
+    </details>
+    <details class="faq">
+      <summary>全屏下菜单不显示？</summary>
+      <p>优先用「窗口化」或「无边框窗口」独占全屏下覆盖层可能被游戏抢焦点，切一次窗口模式就能正常呼出</p>
+    </details>
+    <details class="faq">
+      <summary>配置文件能带走吗？</summary>
+      <p>可以在「设置 → 杂项」点「保存配置」，会在本地生成配置文件；换机器后放进同目录，点「加载配置」还原</p>
+    </details>
+    <details class="faq">
+      <summary>有 bug 或者想加功能？</summary>
+      <p>找作者 <code>[Admin]sh1r0</code>，QQ <code>3269576560</code>BUG 反馈、催更、功能建议都收</p>
+    </details>
+    <details class="faq">
+      <summary>会封号吗？</summary>
+      <p>通过独立进程读写内存实现，不修改游戏文件本体但任何联机环境都有风险，自己权衡</p>
+    </details>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <span>AQTool Alpha · By [Admin]sh1r0</span>
+      <span>QQ 3269576560</span>
+    </div>
+  </footer>
+
+</main>
+
+<div class="player" id="player">
+  <button class="p-fab" id="pFab" aria-label="打开播放器" aria-expanded="false">
+    <span class="p-disc" id="pDisc">
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" opacity=".2"/><circle cx="12" cy="12" r="3.1"/><path d="M17.5 6.2v6.1a2.3 2.3 0 1 1-1.6-2.2V7.6l-4.6 1v5.9a2.3 2.3 0 1 1-1.6-2.2V6.9l7.8-1.7Z" opacity=".9"/></svg>
+    </span>
+  </button>
+
+  <div class="p-panel" id="pPanel" hidden>
+    <div class="p-head">
+      <div class="p-cover" id="pCover"><span>♪</span></div>
+      <div class="p-meta">
+        <p class="p-title" id="pTitle">未选择曲目</p>
+        <p class="p-sub" id="pSub">点一首开始</p>
+      </div>
+      <button class="p-close" id="pClose" aria-label="收起">×</button>
+    </div>
+
+    <div class="p-bar-row">
+      <span class="p-time" id="pNow">0:00</span>
+      <div class="p-bar">
+        <div class="p-fill" id="pFill"></div>
+        <span class="p-dot" id="pDot"></span>
+        <input class="p-range" id="pRange" type="range" min="0" max="1000" value="0" step="1" aria-label="进度" />
+      </div>
+      <span class="p-time" id="pTotal">0:00</span>
+    </div>
+
+    <div class="p-controls">
+      <button class="p-btn p-btn-sm" id="pPrev" aria-label="上一首">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg>
+      </button>
+      <button class="p-btn p-btn-main" id="pPlay" aria-label="播放 / 暂停">
+        <svg id="pIconPlay" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.1v13.8c0 .8.9 1.3 1.6.9l10.4-6.9a1.1 1.1 0 0 0 0-1.8L9.6 4.2A1.1 1.1 0 0 0 8 5.1Z"/></svg>
+        <svg id="pIconPause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg>
+      </button>
+      <button class="p-btn p-btn-sm" id="pNext" aria-label="下一首">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg>
+      </button>
+      <div class="p-vol">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5 6.5 9H3v6h3.5L11 19z"/><path d="M15.5 8.5a4.5 4.5 0 0 1 0 7"/></svg>
+        <input class="p-vol-range" id="pVol" type="range" min="0" max="100" value="30" aria-label="音量" />
+      </div>
+    </div>
+
+    <ul class="p-list" id="pList"></ul>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="script.js?v=11"></script>
+</body>
+</html>
