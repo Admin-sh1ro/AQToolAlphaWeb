@@ -220,7 +220,7 @@ fitStage();
    ============================================================ */
 
 const SONGS = [
-  { name: "Duvet", artist: "Bôa", url: "Bôa - Duvet.mp3" },
+  { name: "Duvet", artist: "Bôa", url: "Boa - Duvet.mp3" },
   { name: "Shootout", artist: "Izzamuzzic · Julien Marchal", url: "Izzamuzzic - Julien Marchal - Shootout.mp3" },
   { name: "Wait a Minute!", artist: "WILLOW", url: "WILLOW - Wait a Minute!.mp3" },
   { name: "Call Me (Slowed)", artist: "plenka", url: "plenka - Call Me (Slowed).mp3" }
@@ -247,7 +247,9 @@ const pVol = document.getElementById("pVol");
 const pList = document.getElementById("pList");
 
 const audio = new Audio();
-audio.preload = "metadata";
+/* auto：一开始就预取数据。用 metadata 的话，无 Xing 头的 mp3 要等整首下完才能算出时长，
+   表现就是进度条一直 0:00 / 0:00 */
+audio.preload = "auto";
 
 /* 音量：滑块 → 听觉曲线。上限压到 62%，低段更轻，避免一上来太大声 */
 const VOL_MAX = 0.62;
@@ -329,8 +331,8 @@ function parseApic(buf) {
 }
 
 /* 只读取文件开头一段就够解析 ID3 了。
-   不依赖服务端支持 Range：用流读到上限就 cancel，避免把整首歌 8MB 拉下来。 */
-const HEAD_BYTES = 1024 * 1024;
+   ID3 标签（含封面）现在只有 3–20KB，128KB 足够，不必拉 1MB */
+const HEAD_BYTES = 128 * 1024;
 
 async function fetchHead(url, limit) {
   const res = await fetch(url, { headers: { Range: "bytes=0-" + (limit - 1) } });
@@ -423,17 +425,41 @@ function select(i, autoplay) {
   if (autoplay) play();
 }
 
+/* 播放被浏览器拦截时先挂起，等 canplay（数据够了）再自动重试一次，
+   否则用户会看到按钮变暂停但声音一直不出来 */
+let pendingPlay = false;
+
 function play() {
   applyVolume();
+  pendingPlay = true;
   audio.play().then(() => {
-    pIconPlay.style.display = "none";
-    pIconPause.style.display = "block";
-    player.classList.add("playing");
-    started = true;
+    pendingPlay = false;
+    onPlaying();
   }).catch(() => {
-    pSub.textContent = "点一下页面任意处开始";
+    // 可能是自动播放被拦，也可能是还没缓冲完 —— 都留给 canplay 再试
+    pSub.textContent = "缓冲中…";
   });
 }
+
+function onPlaying() {
+  pIconPlay.style.display = "none";
+  pIconPause.style.display = "block";
+  player.classList.add("playing");
+  started = true;
+  if (SONGS[current]) pSub.textContent = SONGS[current].artist;
+}
+
+audio.addEventListener("canplay", () => {
+  if (pendingPlay && audio.paused) {
+    audio.play().then(() => { pendingPlay = false; onPlaying(); }).catch(() => {});
+  }
+});
+
+/* 缓冲期间给个反馈，别让人以为卡死 */
+audio.addEventListener("waiting", () => {
+  pSub.textContent = "缓冲中…";
+});
+audio.addEventListener("playing", onPlaying);
 
 function pause() {
   audio.pause();
@@ -457,9 +483,15 @@ pPlay.addEventListener("click", toggle);
 pPrev.addEventListener("click", () => select(current - 1, true));
 pNext.addEventListener("click", () => select(current + 1, true));
 
-audio.addEventListener("loadedmetadata", () => { pTotal.textContent = fmt(audio.duration); });
+audio.addEventListener("loadedmetadata", () => {
+  // 没有 Xing 头的老 mp3，duration 可能是 Infinity/NaN，先显示占位
+  pTotal.textContent = Number.isFinite(audio.duration) ? fmt(audio.duration) : "--:--";
+});
+audio.addEventListener("durationchange", () => {
+  if (Number.isFinite(audio.duration)) pTotal.textContent = fmt(audio.duration);
+});
 audio.addEventListener("timeupdate", () => {
-  if (!audio.duration || dragging) return;
+  if (!Number.isFinite(audio.duration) || dragging) return;
   const pct = (audio.currentTime / audio.duration) * 100;
   pFill.style.width = pct + "%";
   pDot.style.left = pct + "%";
@@ -467,11 +499,6 @@ audio.addEventListener("timeupdate", () => {
   pNow.textContent = fmt(audio.currentTime);
 });
 audio.addEventListener("ended", () => select(current + 1, true));
-audio.addEventListener("play", () => {
-  pIconPlay.style.display = "none";
-  pIconPause.style.display = "block";
-  player.classList.add("playing");
-});
 audio.addEventListener("pause", () => {
   pIconPlay.style.display = "block";
   pIconPause.style.display = "none";
@@ -498,13 +525,7 @@ select(0, false);
 
 function tryAutoplay() {
   if (started) return;
-  applyVolume();
-  audio.play().then(() => {
-    started = true;
-    pSub.textContent = SONGS[current].artist;
-  }).catch(() => {
-    pSub.textContent = "点一下页面开始播放";
-  });
+  play();   // 统一走 play()：拦截/缓冲都交给 canplay 重试
 }
 
 window.addEventListener("load", tryAutoplay);
